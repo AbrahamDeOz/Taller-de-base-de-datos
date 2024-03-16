@@ -1,0 +1,203 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE Orders;
+ERROR: 1007 (HY000): Can't create database 'orders'; database exists
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE Orders2;
+Query OK, 1 row affected (0.1010 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE TABLE SALESREPS (ID INT AUTO_INCREMENT  KEY, LASTNAME VARCHAR(50) NOT NULL, FIRSTNAME VARCHAR(50) NOT NULL, COMMISSION DECIMAL(4,2) NOT NULL);
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > use orders2;
+Default schema set to `orders2`.
+Fetching global names, object names from `orders2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE SALESREPS (ID INT AUTO_INCREMENT  KEY, LASTNAME VARCHAR(50) NOT NULL, FIRSTNAME VARCHAR(50) NOT NULL, COMMISSION DECIMAL(4,2) NOT NULL);
+Query OK, 0 rows affected (0.1457 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DROP TABLE salesreps;
+Query OK, 0 rows affected (0.1258 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
+Empty set (0.0073 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE SALESREPS (ID INT AUTO_INCREMENT  KEY, LASTNAME VARCHAR(50) NOT NULL, FIRSTNAME VARCHAR(50) NOT NULL, COMMISSION DECIMAL(1,2) NOT NULL);
+ERROR: 1427 (42000): For float(M,D), double(M,D) or decimal(M,D), M must be >= D (column 'COMMISSION').
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE SALESREPS (ID INT AUTO_INCREMENT  KEY, LASTNAME VARCHAR(50) NOT NULL, FIRSTNAME VARCHAR(50) NOT NULL, COMMISSION DECIMAL(2,2) NOT NULL);
+Query OK, 0 rows affected (0.1421 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL >
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| credit_cards       |
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| orders2            |
+| performance_schema |
+| sakila             |
+| sys                |
+| tarejetas          |
+| tbd2               |
+| world              |
++--------------------+
+12 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  SQL > use orders2;
+Default schema set to `orders2`.
+Fetching global names, object names from `orders2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| salesreps         |
++-------------------+
+1 row in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE CUSTOMERS (ID INT AUTO_INCREMENT PRIMARY KEY, LASTNAME VARCHAR(50) NOT NULL, FIRSTNAME VARCHAR(50) NOT NULL, COMPANYNAME VARCHAR(50), STREET_1 VARCHAR(50), STREET_2 VARCHAR(50), CITY VARCHAR(50), STATE VARCHAR(50), ZIPCODE INT(7), PHONE INT(10), FAX INT(10), EMAIL VARCHAR(100), S_ID INT NOT NULL);
+Query OK, 0 rows affected, 3 warnings (0.0321 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| customers         |
+| salesreps         |
++-------------------+
+2 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE ORDERS (ID INT AUTO_INCREMENT PRIMARY KEY, C_ID INT NOT NULL, ORDERDATE DATE, SHIPDATE DATE, PAIDDATE DATE, STATUS VARCHAR(50));
+Query OK, 0 rows affected (0.0317 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| customers         |
+| orders            |
+| salesreps         |
++-------------------+
+3 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE ITEMS (O_ID INT NOT NULL, ID INT NOT NULL, P_ID INT NOT NULL, QUANTITY INT NOT NULL);
+Query OK, 0 rows affected (0.0372 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| customers         |
+| items             |
+| orders            |
+| salesreps         |
++-------------------+
+4 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DROP TABLE ITEMS
+                                        -> ;
+Query OK, 0 rows affected (0.0222 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE ITEMS (O_ID INT NOT NULL, ID INT NOT NULL key, P_ID INT NOT NULL, QUANTITY INT NOT NULL);
+Query OK, 0 rows affected (0.0306 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| customers         |
+| items             |
+| orders            |
+| salesreps         |
++-------------------+
+4 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > CREATE TABLE PARTS (ID INT NOT NULL PRIMARY KEY, DESCRIPTION VARCHAR(255) NOT NULL, UNITPRICE DECIMAL(6,2) NOT NULL, ONHAND ENUM('SI', 'NO') NOT NULL, REORDER VARCHAR(50) NOT NULL);
+Query OK, 0 rows affected (0.0347 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_orders2 |
++-------------------+
+| customers         |
+| items             |
+| orders            |
+| parts             |
+| salesreps         |
++-------------------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DESC CUSTOMERS;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| ID          | int          | NO   | PRI | NULL    | auto_increment |
+| LASTNAME    | varchar(50)  | NO   |     | NULL    |                |
+| FIRSTNAME   | varchar(50)  | NO   |     | NULL    |                |
+| COMPANYNAME | varchar(50)  | YES  |     | NULL    |                |
+| STREET_1    | varchar(50)  | YES  |     | NULL    |                |
+| STREET_2    | varchar(50)  | YES  |     | NULL    |                |
+| CITY        | varchar(50)  | YES  |     | NULL    |                |
+| STATE       | varchar(50)  | YES  |     | NULL    |                |
+| ZIPCODE     | int          | YES  |     | NULL    |                |
+| PHONE       | int          | YES  |     | NULL    |                |
+| FAX         | int          | YES  |     | NULL    |                |
+| EMAIL       | varchar(100) | YES  |     | NULL    |                |
+| S_ID        | int          | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+13 rows in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DESC ITEMS;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| O_ID     | int  | NO   |     | NULL    |       |
+| ID       | int  | NO   | PRI | NULL    |       |
+| P_ID     | int  | NO   |     | NULL    |       |
+| QUANTITY | int  | NO   |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+4 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DESC orders;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| C_ID      | int         | NO   |     | NULL    |                |
+| ORDERDATE | date        | YES  |     | NULL    |                |
+| SHIPDATE  | date        | YES  |     | NULL    |                |
+| PAIDDATE  | date        | YES  |     | NULL    |                |
+| STATUS    | varchar(50) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DESC PARTS;
++-------------+-----------------+------+-----+---------+-------+
+| Field       | Type            | Null | Key | Default | Extra |
++-------------+-----------------+------+-----+---------+-------+
+| ID          | int             | NO   | PRI | NULL    |       |
+| DESCRIPTION | varchar(255)    | NO   |     | NULL    |       |
+| UNITPRICE   | decimal(6,2)    | NO   |     | NULL    |       |
+| ONHAND      | enum('SI','NO') | NO   |     | NULL    |       |
+| REORDER     | varchar(50)     | NO   |     | NULL    |       |
++-------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL > DESC salesreps;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| ID         | int          | NO   | PRI | NULL    | auto_increment |
+| LASTNAME   | varchar(50)  | NO   |     | NULL    |                |
+| FIRSTNAME  | varchar(50)  | NO   |     | NULL    |                |
+| COMMISSION | decimal(2,2) | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  orders2  SQL >
