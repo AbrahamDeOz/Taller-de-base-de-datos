@@ -1,0 +1,169 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > CREATE ROLES "rol_Lectura";
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ROLES "rol_Lectura"' at line 1
+ MySQL  localhost:3306 ssl  SQL > CREATE ROLE "rol_Lectura";
+Query OK, 0 rows affected (0.1134 sec)
+ MySQL  localhost:3306 ssl  SQL > GRANT SELECT ON *.* TO "rol_Lectura";
+Query OK, 0 rows affected (0.1023 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE USER "sololectura"@"localhost" IDENTIFIED by "0000";
+Query OK, 0 rows affected (0.0989 sec)
+ MySQL  localhost:3306 ssl  SQL > gr
+                               -> and
+                               -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gr
+and' at line 1
+ MySQL  localhost:3306 ssl  SQL > GRANT "rol_Lectura" to "sololectura"@"localhost";
+Query OK, 0 rows affected (0.0888 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc sololectura@localhost
+Creating a Classic session to 'sololectura@localhost'
+Please provide the password for 'sololectura@localhost': ****
+Save password for 'sololectura@localhost'? [Y]es/[N]o/Ne[v]er (default No): v
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
++--------------------+
+2 rows in set (0.0639 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 10
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > a
+ALTER    ANALYZE
+ MySQL  localhost:3306 ssl  SQL > set per
+performance_schema                                        performance_schema_max_file_classes                       performance_schema_max_statement_stack
+performance_schema_accounts_size                          performance_schema_max_file_handles                       performance_schema_max_table_handles
+performance_schema_digests_size                           performance_schema_max_file_instances                     performance_schema_max_table_instances
+performance_schema_error_size                             performance_schema_max_index_stat                         performance_schema_max_table_lock_stat
+performance_schema_events_stages_history_long_size        performance_schema_max_memory_classes                     performance_schema_max_thread_classes
+performance_schema_events_stages_history_size             performance_schema_max_metadata_locks                     performance_schema_max_thread_instances
+performance_schema_events_statements_history_long_size    performance_schema_max_mutex_classes                      performance_schema_session_connect_attrs_size
+performance_schema_events_statements_history_size         performance_schema_max_mutex_instances                    performance_schema_setup_actors_size
+performance_schema_events_transactions_history_long_size  performance_schema_max_prepared_statements_instances      performance_schema_setup_objects_size
+performance_schema_events_transactions_history_size       performance_schema_max_program_instances                  performance_schema_show_processlist
+performance_schema_events_waits_history_long_size         performance_schema_max_rwlock_classes                     performance_schema_users_size
+performance_schema_events_waits_history_size              performance_schema_max_rwlock_instances                   PERSIST
+performance_schema_hosts_size                             performance_schema_max_socket_classes                     PERSIST_ONLY
+performance_schema_max_cond_classes                       performance_schema_max_socket_instances                   persist_only_admin_x509_subject
+performance_schema_max_cond_instances                     performance_schema_max_sql_text_length                    persist_sensitive_variables_in_plaintext
+performance_schema_max_digest_length                      performance_schema_max_stage_classes                      persisted_globals_load
+performance_schema_max_digest_sample_age                  performance_schema_max_statement_classes
+ MySQL  localhost:3306 ssl  SQL > set PERSIST activate_all_roles_on_login = o
+OCT()           OCTET_LENGTH()  ON              ORD()           orders          orders2
+ MySQL  localhost:3306 ssl  SQL > set PERSIST activate_all_roles_on_login = o
+OCT()           OCTET_LENGTH()  ON              ORD()           orders          orders2
+ MySQL  localhost:3306 ssl  SQL > set PERSIST activate_all_roles_on_login = oN;
+Query OK, 0 rows affected (0.0906 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc sololectura@localhost
+Creating a Classic session to 'sololectura@localhost'
+Please provide the password for 'sololectura@localhost':
+MySQL Error 1045 (28000): Access denied for user 'sololectura'@'localhost' (using password: NO)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc sololectura@localhost
+Creating a Classic session to 'sololectura@localhost'
+Please provide the password for 'sololectura@localhost': ****
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 12
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| credit_cards       |
+| empreza            |
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| orders2            |
+| performance_schema |
+| sakila             |
+| sys                |
+| tarejetas          |
+| tbd2               |
+| world              |
++--------------------+
+14 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  SQL > use company
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  company  SQL > SHOW TABLEs;
++-------------------+
+| Tables_in_company |
++-------------------+
+| address           |
+| employee          |
+| projects          |
+| prueba            |
++-------------------+
+4 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  company  SQL > SELECT * FROM address;
++-----------+------------+---------+-------------+---------+
+| AddressId | EmployeeId | Country | State       | City    |
++-----------+------------+---------+-------------+---------+
+|         1 |       1001 | India   | Odisha      | BBSR    |
+|         2 |       1002 | India   | Maharashtra | Mumbai  |
+|         3 |       1003 | India   | Maharashtra | Pune    |
+|         4 |       1004 | India   | Odisha      | Cuttack |
+|         5 |       1005 | India   | Maharashtra | Nagpur  |
+|         6 |       1006 | India   | Odisha      | BBSR    |
++-----------+------------+---------+-------------+---------+
+6 rows in set (0.1570 sec)
+ MySQL  localhost:3306 ssl  company  SQL > DELETE FROM address WHERE AddressId=1;
+ERROR: 1142 (42000): DELETE command denied to user 'sololectura'@'localhost' for table 'address'
+ MySQL  localhost:3306 ssl  company  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 13
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > set PERSIST activate_all_roles_on_login = off;
+Query OK, 0 rows affected (0.0886 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc sololectura@localhost
+Creating a Classic session to 'sololectura@localhost'
+Please provide the password for 'sololectura@localhost': ****
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 14
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES
+                               -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
++--------------------+
+2 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  SQL >
