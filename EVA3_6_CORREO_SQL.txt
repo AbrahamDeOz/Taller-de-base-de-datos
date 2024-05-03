@@ -1,0 +1,31 @@
+DELIMITER $$
+CREATE PROCEDURE agregar_correo_electronico()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE actor_id_val INT;
+    DECLARE last_name_val VARCHAR(45);
+    DECLARE correo_electronico_val VARCHAR(100);
+    -- Agregar la columna de correo 
+    ALTER TABLE actor
+    ADD COLUMN correo_electronico VARCHAR(100);
+    -- Declarar un cursor para recorrer la tabla actor
+    BEGIN
+        DECLARE cur CURSOR FOR SELECT actor_id, last_name FROM actor;
+        -- no se encuentran más registros
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+        OPEN cur;
+        read_loop: LOOP
+            FETCH cur INTO actor_id_val, last_name_val;
+            IF done THEN
+                LEAVE read_loop;
+            END IF;
+            SET correo_electronico_val = CONCAT('T', actor_id_val, '.', last_name_val, '@gmail.com');
+            UPDATE actor
+            SET correo_electronico = correo_electronico_val
+            WHERE actor_id = actor_id_val;
+        END LOOP;
+
+        CLOSE cur;
+    END;
+END$$
+DELIMITER ;

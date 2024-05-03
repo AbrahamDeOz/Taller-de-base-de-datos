@@ -1,0 +1,150 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| credit_cards       |
+| empreza            |
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| orders2            |
+| performance_schema |
+| sakila             |
+| sys                |
+| tarejetas          |
+| tbd2               |
+| tbd_3              |
+| world              |
++--------------------+
+15 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  SQL > use sakila;
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > SHOW TABLEs;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > DESC actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0033 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > SELECT* FROM actor LIMIT 10;
++----------+------------+--------------+---------------------+
+| actor_id | first_name | last_name    | last_update         |
++----------+------------+--------------+---------------------+
+|        1 | PENELOPE   | GUINESS      | 2006-02-15 04:34:33 |
+|        2 | NICK       | WAHLBERG     | 2006-02-15 04:34:33 |
+|        3 | ED         | CHASE        | 2006-02-15 04:34:33 |
+|        4 | JENNIFER   | DAVIS        | 2006-02-15 04:34:33 |
+|        5 | JOHNNY     | LOLLOBRIGIDA | 2006-02-15 04:34:33 |
+|        6 | BETTE      | NICHOLSON    | 2006-02-15 04:34:33 |
+|        7 | GRACE      | MOSTEL       | 2006-02-15 04:34:33 |
+|        8 | MATTHEW    | JOHANSSON    | 2006-02-15 04:34:33 |
+|        9 | JOE        | SWANK        | 2006-02-15 04:34:33 |
+|       10 | CHRISTIAN  | GABLE        | 2006-02-15 04:34:33 |
++----------+------------+--------------+---------------------+
+10 rows in set (0.1039 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > CREATE TABLE tbd_3.actor LIKE sakila.actor;
+Query OK, 0 rows affected (0.2017 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > INSERT INTO tbd_3.actor SELECT * FROM sakila.actor;
+Query OK, 200 rows affected (0.1079 sec)
+
+Records: 200  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  sakila  SQL > use tbd_3;
+Default schema set to `tbd_3`.
+Fetching global names, object names from `tbd_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SHOW TABLEs;
++-----------------+
+| Tables_in_tbd_3 |
++-----------------+
+| actor           |
++-----------------+
+1 row in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT contar_actores();
++------------------+
+| contar_actores() |
++------------------+
+|              200 |
++------------------+
+1 row in set (0.0854 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > DESC actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0023 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT max(actori_id) FROM actor;
+ERROR: 1054 (42S22): Unknown column 'actori_id' in 'field list'
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT max(actor_id) FROM actor;
++---------------+
+| max(actor_id) |
++---------------+
+|           200 |
++---------------+
+1 row in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > agregar_actor(",", ",");
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'agregar_actor(",", ",")' at line 1
+ MySQL  localhost:3306 ssl  tbd_3  SQL > agregar_actor("a", "a");
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'agregar_actor("a", "a")' at line 1
+ MySQL  localhost:3306 ssl  tbd_3  SQL > drop FUNCTION agregar_actor;
+Query OK, 0 rows affected (0.0702 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT agregar_actor("abr", "ghz");
++-----------------------------+
+| agregar_actor("abr", "ghz") |
++-----------------------------+
+|                         201 |
++-----------------------------+
+1 row in set (0.0896 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL >

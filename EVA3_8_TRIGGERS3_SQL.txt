@@ -1,0 +1,90 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES
+                               -> ;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| credit_cards       |
+| empreza            |
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| orders2            |
+| performance_schema |
+| sakila             |
+| sys                |
+| tarejetas          |
+| tbd2               |
+| tbd_3              |
+| world              |
++--------------------+
+15 rows in set (0.0817 sec)
+ MySQL  localhost:3306 ssl  SQL > use tbd_3;
+Default schema set to `tbd_3`.
+Fetching global names, object names from `tbd_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SHOW TABLEs;
++-----------------+
+| Tables_in_tbd_3 |
++-----------------+
+| account         |
+| actor           |
+| bitacora        |
++-----------------+
+3 rows in set (0.0024 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL >  CALL generar_actorid();
+ERROR: 1305 (42000): PROCEDURE tbd_3.generar_actorid does not exist
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO acto(firsst_name, last_name) )rvalue("juan", "Perez jolote");
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')rvalue("juan", "Perez jolote")' at line 1
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO acto(firsst_name, last_name) value("juan", "Perez jolote");
+ERROR: 1146 (42S02): Table 'tbd_3.acto' doesn't exist
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(firsst_name, last_name) value("juan", "Perez jolote");
+ERROR: 1054 (42S22): Unknown column 'firsst_name' in 'field list'
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(first_name, last_name) value("juan", "Perez jolote");
+Query OK, 1 row affected (0.0164 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT max(actor_id from actor);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from actor)' at line 1
+ MySQL  localhost:3306 ssl  tbd_3  SQL > SELECT max(actor_id) from actor;
++---------------+
+| max(actor_id) |
++---------------+
+|           203 |
++---------------+
+1 row in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > DELETE from actor;
+Query OK, 203 rows affected (0.0981 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(first_name, last_name) value("juan", "Perez jolote");
+ERROR: 1048 (23000): Column 'actor_id' cannot be null
+ MySQL  localhost:3306 ssl  tbd_3  SQL > DESC actor;
++--------------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field              | Type              | Null | Key | Default           | Extra                                         |
++--------------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id           | smallint unsigned | NO   |     | NULL              |                                               |
+| first_name         | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name          | varchar(45)       | NO   | MUL | NULL              |                                               |
+| last_update        | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
+| correo_electronico | varchar(100)      | YES  |     | NULL              |                                               |
++--------------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+5 rows in set (0.0030 sec)
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(first_name, last_name) value("juan", "Perez jolote");
+ERROR: 1048 (23000): Column 'actor_id' cannot be null
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(first_name, last_name) value("juan", "Perez jolote");
+ERROR: 1054 (42S22): Unknown column 'actor_id' in 'field list'
+ MySQL  localhost:3306 ssl  tbd_3  SQL > INSERT INTO actor(first_name, last_name) value("juan", "Perez jolote");
+ERROR: 1048 (23000): Column 'actor_id' cannot be null
+ MySQL  localhost:3306 ssl  tbd_3  SQL >
